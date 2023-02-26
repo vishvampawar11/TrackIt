@@ -1,20 +1,84 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { Pressable, StatusBar } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import { Ionicons } from "@expo/vector-icons";
 
-export default function App() {
+import { GlobalStyles } from "./constants/styles";
+import TransactionsContextProvider from "./store/transactions-context";
+import AllTransactions from "./screens/AllTransactions";
+import ManageTransaction from "./screens/ManageTransaction";
+import ProfileScreen from "./screens/ProfileScreen";
+import TransactionDetail from "./screens/TransactionDetail";
+
+const Stack = createStackNavigator();
+
+const App = () => {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <>
+      <StatusBar />
+      <TransactionsContextProvider>
+        <NavigationContainer>
+          <Stack.Navigator
+            screenOptions={{
+              headerTitle: "TrackIt",
+              headerTitleAlign: "center",
+              headerStyle: {
+                backgroundColor: GlobalStyles.colors.accent,
+              },
+              headerTintColor: "white",
+              cardStyle: { backgroundColor: "#e5e5e5" },
+            }}
+          >
+            <Stack.Group
+              screenOptions={({ navigation }) => ({
+                headerRight: () => (
+                  <Pressable
+                    onPress={() => {
+                      navigation.navigate("Profile");
+                    }}
+                  >
+                    <Ionicons
+                      style={{ marginRight: 20 }}
+                      name="person-circle-outline"
+                      size={28}
+                      color={GlobalStyles.colors.white}
+                    />
+                  </Pressable>
+                ),
+              })}
+            >
+              <Stack.Screen
+                name="AllTransactions"
+                component={AllTransactions}
+              />
+              <Stack.Screen
+                name="Profile"
+                component={ProfileScreen}
+                options={{ headerRight: () => null }}
+              />
+            </Stack.Group>
+            <Stack.Group
+              screenOptions={{
+                presentation: "modal",
+                headerLeft: () => null,
+                headerShown: false,
+                cardStyle: { backgroundColor: GlobalStyles.colors.white },
+              }}
+            >
+              <Stack.Screen
+                name="ManageTransaction"
+                component={ManageTransaction}
+              />
+              <Stack.Screen
+                name="TransactionDetail"
+                component={TransactionDetail}
+              />
+            </Stack.Group>
+          </Stack.Navigator>
+        </NavigationContainer>
+      </TransactionsContextProvider>
+    </>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
