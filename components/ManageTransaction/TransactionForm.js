@@ -1,12 +1,5 @@
 import { useState } from "react";
-import {
-  Alert,
-  Pressable,
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-} from "react-native";
+import { Alert, Pressable, StyleSheet, Text, View } from "react-native";
 import { GlobalStyles } from "../../constants/styles";
 import Button from "../UI/Button";
 import DatePicker from "./DatePicker";
@@ -19,14 +12,10 @@ const TransactionForm = ({ defaultValues, onSubmit }) => {
   const [description, setDescription] = useState(
     defaultValues ? defaultValues.description : ""
   );
-  const [date, setDate] = useState(
-    defaultValues ? defaultValues.date : new Date()
-  );
+  const [date, setDate] = useState(defaultValues ? defaultValues.date : "");
   const [isIncome, setIsIncome] = useState(
     defaultValues ? defaultValues.isIncome : true
   );
-
-  const [showDatePicker, setShowDatePicker] = useState(false);
 
   const amountChangeHandler = (amount) => setAmount(amount);
   const descriptionChangeHandler = (description) => setDescription(description);
@@ -101,21 +90,21 @@ const TransactionForm = ({ defaultValues, onSubmit }) => {
           onChangeText: descriptionChangeHandler,
         }}
       />
-      <TransactionInput
+      {/* <TransactionInput
         textInputConfig={{
           placeholder: "Date",
           value: date,
           maxLength: 10,
           onChangeText: dateChangeHandler,
         }}
-      />
-      {/* <DatePicker dateChangeHandler={dateChangeHandler} /> */}
+      /> */}
+      <DatePicker onSubmit={dateChangeHandler} defaultDate={date} />
 
       <View>
         <Button onPress={submitHandler} mode="flat">
           Save
         </Button>
-      </View> 
+      </View>
     </View>
   );
 };

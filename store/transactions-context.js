@@ -1,33 +1,9 @@
 import { createContext, useEffect, useReducer } from "react";
-import uuid from "react-native-uuid";
-
-const DUMMY_TRANSACTIONS = [
-  {
-    id: "t1",
-    amount: 7329,
-    description: "Salary",
-    isIncome: true,
-    date: "April 12, 2022",
-  },
-  {
-    id: "t2",
-    amount: 329,
-    description: "Car tyre change",
-    isIncome: false,
-    date: "February 22, 2023",
-  },
-  {
-    id: "t3",
-    amount: 4000,
-    description: "Furniture",
-    isIncome: false,
-    date: "February 22, 2023",
-  },
-];
 
 export const TransactionsContext = createContext({
   transactions: [],
   addTransaction: ({ description, amount, date, isIncome }) => {},
+  setTransactions: (transactions) => {},
   deleteTransaction: (id) => {},
   updateTransaction: (id, { description, amount, date, isIncome }) => {},
 });
@@ -35,8 +11,10 @@ export const TransactionsContext = createContext({
 const transactionsReducer = (state, action) => {
   switch (action.type) {
     case "ADD":
-      const id = uuid.v4();
-      return [{ ...action.payload, id: id }, ...state];
+      return [{ ...action.payload }, ...state];
+
+    case "SET":
+      return action.payload;
 
     case "UPDATE":
       const index = state.findIndex(
@@ -58,13 +36,14 @@ const transactionsReducer = (state, action) => {
 };
 
 const TransactionsContextProvider = ({ children }) => {
-  const [transactionsState, dispatch] = useReducer(
-    transactionsReducer,
-    DUMMY_TRANSACTIONS
-  );
+  const [transactionsState, dispatch] = useReducer(transactionsReducer, []);
 
   const addTransaction = (transactionData) => {
     dispatch({ type: "ADD", payload: transactionData });
+  };
+
+  const setTransactions = (transactions) => {
+    dispatch({ type: "SET", payload: transactions });
   };
 
   const deleteTransaction = (id) => {
@@ -78,6 +57,7 @@ const TransactionsContextProvider = ({ children }) => {
   const value = {
     transactions: transactionsState,
     addTransaction: addTransaction,
+    setTransactions: setTransactions,
     deleteTransaction: deleteTransaction,
     updateTransaction: updateTransaction,
   };

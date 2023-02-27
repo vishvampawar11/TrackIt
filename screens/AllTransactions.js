@@ -1,13 +1,25 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { StyleSheet, View } from "react-native";
 
 import { TransactionsContext } from "../store/transactions-context";
 import TransactionsListContainer from "../components/TransactionsOutput/TransactionsListContainer";
 import TransactionSummary from "../components/TransactionsOutput/TransactionSummary";
 import IconButton from "../components/UI/IconButton";
+import { getTransactions } from "../store/async-storage";
 
 const AllTransactions = ({ navigation }) => {
   const transactionsCtx = useContext(TransactionsContext);
+
+  useEffect(() => {
+    const getExpensesHelper = async () => {
+      const fetchedTransactions = await getTransactions();
+      if (fetchedTransactions) {
+        transactionsCtx.setTransactions(fetchedTransactions);
+      }
+    };
+
+    getExpensesHelper();
+  }, []);
 
   let income = 0;
   let expense = 0;

@@ -1,8 +1,9 @@
 import { useContext } from "react";
+import uuid from "react-native-uuid";
 import { Ionicons } from "@expo/vector-icons";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 
-// import { addTransaction } from "../store/async-storage";
+import { addTransaction, updateTransaction } from "../store/async-storage";
 import { GlobalStyles } from "../constants/styles";
 import { TransactionsContext } from "../store/transactions-context";
 import TransactionForm from "../components/ManageTransaction/TransactionForm";
@@ -19,9 +20,12 @@ const ManageTransaction = ({ navigation, route }) => {
 
   const submitHandler = (transactionData) => {
     if (isEditing) {
+      updateTransaction(transactionId, transactionData);
       transactionsCtx.updateTransaction(transactionId, transactionData);
     } else {
-      // addTransaction(transactionData);
+      const id = uuid.v4();
+      transactionData.id = id;
+      addTransaction(transactionData);
       transactionsCtx.addTransaction(transactionData);
     }
     navigation.goBack();

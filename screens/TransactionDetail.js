@@ -5,6 +5,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { TransactionsContext } from "../store/transactions-context";
 import { GlobalStyles } from "../constants/styles";
 import Button from "../components/UI/Button";
+import { deleteTransaction } from "../store/async-storage";
 
 const TransactionDetail = ({ navigation, route }) => {
   const transactionsCtx = useContext(TransactionsContext);
@@ -16,6 +17,7 @@ const TransactionDetail = ({ navigation, route }) => {
   );
 
   const deleteTransactionHandler = () => {
+    deleteTransaction(transactionId);
     transactionsCtx.deleteTransaction(transactionId);
     navigation.goBack();
   };

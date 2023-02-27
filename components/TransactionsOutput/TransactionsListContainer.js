@@ -1,8 +1,11 @@
-import { StyleSheet, Text, View } from "react-native";
-import TransactionsList from "./TransactionsList";
+import { SectionList, StyleSheet, Text, View } from "react-native";
+
+import { dateToString, stringToDate } from "../ManageTransaction/DatePicker";
+import TransactionItem from "./TransactionItem";
 
 const TransactionsListContainer = ({ transactions }) => {
   const transactionList = {};
+  const today = dateToString(new Date());
 
   transactions.map((transaction) => {
     if (!transactionList[transaction.date])
@@ -18,20 +21,44 @@ const TransactionsListContainer = ({ transactions }) => {
     );
   }
 
+  const sections = [];
+  Object.entries(transactionList).forEach(([date, items]) => {
+    const newItem = {
+      title: date,
+      data: items,
+    };
+    sections.push(newItem);
+  });
+
+  sections.sort((sectionA, sectionB) => {
+    const dateA = stringToDate(sectionA.title);
+    const dateB = stringToDate(sectionB.title);
+    return dateA < dateB ? 1 : -1;
+  });
+
   return (
-    <View style={{ padding: 13 }}>
-      {Object.entries(transactionList).map(([date, items]) => (
-        <TransactionsList key={date} date={date} items={items} />
-      ))}
-    </View>
+      <SectionList
+      style={styles.container}
+        sections={sections}
+        renderItem={({ item }) => <TransactionItem item={item} />}
+        renderSectionHeader={({ section }) => (
+          <Text style={styles.infoText}>
+            {section.title === today ? "Today" : section.title}
+          </Text>
+        )}
+        keyExtractor={(item) => item.id}
+      />
   );
 };
 
-export default TransactionsListContainer;
-
 const styles = StyleSheet.create({
+  container: {
+    paddingHorizontal: 20,
+  },
   infoText: {
-    paddingTop: 100,
-    alignItems: "center",
+    paddingTop: 15,
+    textAlign: "center",
   },
 });
+
+export default TransactionsListContainer;
