@@ -18,7 +18,7 @@ const App = () => {
   return (
     <>
       <StatusBar />
-      {/* <Provider store={store}> */}
+      <Provider store={store}>
         <TransactionsContextProvider>
           <NavigationContainer>
             <Stack.Navigator
@@ -63,7 +63,7 @@ const App = () => {
             </Stack.Navigator>
           </NavigationContainer>
         </TransactionsContextProvider>
-      {/* </Provider> */}
+      </Provider>
     </>
   );
 };

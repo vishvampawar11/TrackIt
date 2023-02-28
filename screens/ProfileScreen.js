@@ -4,34 +4,34 @@ import { StyleSheet, Text, View } from "react-native";
 import { GlobalStyles } from "../constants/styles";
 import { fetchUsers } from "../util/http";
 
-const ProfileScreen = ({ navigation }) => {
+const ProfileScreen = () => {
   const [user, setUser] = useState();
 
   useEffect(() => {
     const getUserHelper = async () => {
-      const users = await fetchUsers();
-      setUser(users[0]);
+      const fetchedUsers = await fetchUsers();
+      setUser(fetchedUsers[0]);
     };
     getUserHelper();
-  }, [user]);
+  }, []);
 
   return (
-    <View style={styles.container}>
+    <>
       {user && (
-        <>
+        <View style={styles.container}>
           <Ionicons
             name="person-circle"
             size={144}
             color={GlobalStyles.colors.lightBlack}
           />
-          <Text style={styles.username}>{user.name}</Text>
+          <Text style={styles.appUsername}>{user.name}</Text>
           <Text style={styles.text}>{user.email}</Text>
           <Text style={styles.text}>
             {user.address.street}, {user.address.suite}, {user.address.city}
           </Text>
-        </>
+        </View>
       )}
-    </View>
+    </>
   );
 };
 

@@ -24,5 +24,5 @@ NavigationContainer is used for navigating between MainScreen and ProfileScreen
 
 ## Data Management
 
-The transaction data is stored using AsyncStorage and Context API is used to manage application state and ensure data consistency across the app.
-Reudx is used to store profile data.
+1. The transaction data is stored using AsyncStorage and Context API is used to manage application state and ensure data consistency across the app.
+2. Redux is used to store profile data.
