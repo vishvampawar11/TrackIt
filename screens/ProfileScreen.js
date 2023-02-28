@@ -2,14 +2,14 @@ import { Ionicons } from "@expo/vector-icons";
 import { useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { GlobalStyles } from "../constants/styles";
-import { getUser } from "../util/http";
+import { fetchUsers } from "../util/http";
 
 const ProfileScreen = ({ navigation }) => {
   const [user, setUser] = useState();
 
   useEffect(() => {
     const getUserHelper = async () => {
-      const users = await getUser();
+      const users = await fetchUsers();
       setUser(users[0]);
     };
     getUserHelper();

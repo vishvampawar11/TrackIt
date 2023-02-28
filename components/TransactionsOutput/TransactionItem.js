@@ -1,14 +1,11 @@
-import { useNavigation } from "@react-navigation/native";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { GlobalStyles } from "../../constants/styles";
 
-const TransactionItem = ({ item }) => {
+const TransactionItem = ({ item, toggleModal }) => {
   const isIncome = item.isIncome;
 
-  const navigation = useNavigation();
-
   const pressHandler = () => {
-    navigation.navigate("TransactionDetail", { transactionId: item.id });
+    toggleModal(item.id);
   };
 
   return (

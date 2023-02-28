@@ -3,7 +3,7 @@ import { SectionList, StyleSheet, Text, View } from "react-native";
 import { dateToString, stringToDate } from "../ManageTransaction/DatePicker";
 import TransactionItem from "./TransactionItem";
 
-const TransactionsListContainer = ({ transactions }) => {
+const TransactionsListContainer = ({ transactions, toggleModal }) => {
   const transactionList = {};
   const today = dateToString(new Date());
 
@@ -40,7 +40,7 @@ const TransactionsListContainer = ({ transactions }) => {
       <SectionList
       style={styles.container}
         sections={sections}
-        renderItem={({ item }) => <TransactionItem item={item} />}
+        renderItem={({ item }) => <TransactionItem item={item} toggleModal={toggleModal} />}
         renderSectionHeader={({ section }) => (
           <Text style={styles.infoText}>
             {section.title === today ? "Today" : section.title}

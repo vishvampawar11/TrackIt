@@ -8,10 +8,9 @@ import { GlobalStyles } from "../constants/styles";
 import { TransactionsContext } from "../store/transactions-context";
 import TransactionForm from "../components/ManageTransaction/TransactionForm";
 
-const ManageTransaction = ({ navigation, route }) => {
+const ManageTransaction = ({ transactionId, toggleModal }) => {
   const transactionsCtx = useContext(TransactionsContext);
 
-  const transactionId = route.params?.transactionId;
   const isEditing = !!transactionId;
 
   const selectedTransaction = transactionsCtx.transactions.find(
@@ -25,10 +24,11 @@ const ManageTransaction = ({ navigation, route }) => {
     } else {
       const id = uuid.v4();
       transactionData.id = id;
+      console.log(transactionData);
       addTransaction(transactionData);
       transactionsCtx.addTransaction(transactionData);
     }
-    navigation.goBack();
+    toggleModal(null);
   };
 
   return (
@@ -41,8 +41,17 @@ const ManageTransaction = ({ navigation, route }) => {
         onSubmit={submitHandler}
       />
 
-      <Pressable onPress={() => navigation.goBack()}>
-        <Ionicons name="exit" />
+      <Pressable
+        onPress={() => {
+          toggleModal(null);
+        }}
+        style={styles.closeButton}
+      >
+        <Ionicons
+          name="close"
+          size={24}
+          color={GlobalStyles.colors.lightBlack}
+        />
       </Pressable>
     </View>
   );
@@ -58,5 +67,10 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 18,
     color: GlobalStyles.colors.lightBlack,
+  },
+  closeButton: {
+    position: "absolute",
+    right: 24,
+    top: 12,
   },
 });

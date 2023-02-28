@@ -90,14 +90,6 @@ const TransactionForm = ({ defaultValues, onSubmit }) => {
           onChangeText: descriptionChangeHandler,
         }}
       />
-      {/* <TransactionInput
-        textInputConfig={{
-          placeholder: "Date",
-          value: date,
-          maxLength: 10,
-          onChangeText: dateChangeHandler,
-        }}
-      /> */}
       <DatePicker onSubmit={dateChangeHandler} defaultDate={date} />
 
       <View>

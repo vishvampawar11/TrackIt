@@ -7,10 +7,12 @@ import { GlobalStyles } from "../constants/styles";
 import Button from "../components/UI/Button";
 import { deleteTransaction } from "../store/async-storage";
 
-const TransactionDetail = ({ navigation, route }) => {
+const TransactionDetail = ({
+  transactionId,
+  toggleDetailModal,
+  toggleEditModal,
+}) => {
   const transactionsCtx = useContext(TransactionsContext);
-
-  const transactionId = route.params?.transactionId;
 
   const transaction = transactionsCtx.transactions.find(
     (transaction) => transaction.id === transactionId
@@ -19,7 +21,7 @@ const TransactionDetail = ({ navigation, route }) => {
   const deleteTransactionHandler = () => {
     deleteTransaction(transactionId);
     transactionsCtx.deleteTransaction(transactionId);
-    navigation.goBack();
+    toggleDetailModal();
   };
 
   if (transaction !== undefined) {
@@ -45,7 +47,7 @@ const TransactionDetail = ({ navigation, route }) => {
         <Text style={styles.date}>{transaction["date"]}</Text>
         <Button
           onPress={() => {
-            navigation.navigate("ManageTransaction", { transactionId });
+            toggleEditModal(transactionId);
           }}
         >
           Edit
@@ -53,8 +55,12 @@ const TransactionDetail = ({ navigation, route }) => {
         <Button onPress={deleteTransactionHandler} mode="flat">
           Delete
         </Button>
-        <Pressable onPress={() => navigation.goBack()}>
-          <Ionicons name="exit" size={24} />
+        <Pressable style={styles.closeButton} onPress={toggleDetailModal}>
+          <Ionicons
+            name="close"
+            size={24}
+            color={GlobalStyles.colors.lightBlack}
+          />
         </Pressable>
       </View>
     );
@@ -82,6 +88,11 @@ const styles = StyleSheet.create({
     fontSize: 14,
     marginTop: 10,
     marginBottom: 28,
+  },
+  closeButton: {
+    position: "absolute",
+    right: 24,
+    top: 12,
   },
 });
 
