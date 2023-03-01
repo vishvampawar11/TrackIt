@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Keyboard, Pressable, StyleSheet, Text, View } from "react-native";
+
 import { GlobalStyles } from "../../constants/styles";
 import DateTimePicker from "@react-native-community/datetimepicker";
 
@@ -78,8 +79,6 @@ const DatePicker = ({ onSubmit, defaultDate }) => {
   );
 };
 
-export default DatePicker;
-
 const styles = StyleSheet.create({
   input: {
     borderWidth: 1,
@@ -95,3 +94,5 @@ const styles = StyleSheet.create({
     color: "grey",
   },
 });
+
+export default DatePicker;

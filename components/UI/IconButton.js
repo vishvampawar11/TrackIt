@@ -12,8 +12,6 @@ const IconButton = ({ icon, size, color, onPress }) => {
   );
 };
 
-export default IconButton;
-
 const styles = StyleSheet.create({
   button: {
     alignItems: "center",
@@ -24,3 +22,5 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
 });
+
+export default IconButton;

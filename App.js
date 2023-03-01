@@ -3,14 +3,12 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { Ionicons } from "@expo/vector-icons";
 
+import { Provider } from "react-redux";
+import { store } from "./store/redux/store";
 import { GlobalStyles } from "./constants/styles";
 import TransactionsContextProvider from "./store/transactions-context";
 import AllTransactions from "./screens/AllTransactions";
-import ManageTransaction from "./screens/ManageTransaction";
 import ProfileScreen from "./screens/ProfileScreen";
-import TransactionDetail from "./screens/TransactionDetail";
-import { Provider } from "react-redux";
-import { store } from "./store/redux/store";
 
 const Stack = createStackNavigator();
 

@@ -24,7 +24,7 @@ const ProfileScreen = () => {
             size={144}
             color={GlobalStyles.colors.lightBlack}
           />
-          <Text style={styles.appUsername}>{user.name}</Text>
+          <Text style={styles.username}>{user.name}</Text>
           <Text style={styles.text}>{user.email}</Text>
           <Text style={styles.text}>
             {user.address.street}, {user.address.suite}, {user.address.city}

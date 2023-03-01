@@ -3,9 +3,9 @@ import { Pressable, StyleSheet, Text, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
 import { TransactionsContext } from "../store/transactions-context";
+import { deleteTransaction } from "../store/async-storage";
 import { GlobalStyles } from "../constants/styles";
 import Button from "../components/UI/Button";
-import { deleteTransaction } from "../store/async-storage";
 
 const TransactionDetail = ({
   transactionId,

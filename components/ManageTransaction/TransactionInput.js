@@ -24,8 +24,6 @@ const TransactionInput = ({ textInputConfig }) => {
   );
 };
 
-export default TransactionInput;
-
 const styles = StyleSheet.create({
   input: {
     borderWidth: 1,
@@ -36,3 +34,5 @@ const styles = StyleSheet.create({
     paddingLeft: 16,
   },
 });
+
+export default TransactionInput;

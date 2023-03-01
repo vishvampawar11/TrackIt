@@ -33,8 +33,6 @@ const TransactionItem = ({ item, toggleModal }) => {
   );
 };
 
-export default TransactionItem;
-
 const styles = StyleSheet.create({
   container: {
     backgroundColor: GlobalStyles.colors.white,
@@ -45,3 +43,5 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
 });
+
+export default TransactionItem;

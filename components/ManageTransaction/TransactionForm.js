@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { Alert, Pressable, StyleSheet, Text, View } from "react-native";
+
 import { GlobalStyles } from "../../constants/styles";
 import Button from "../UI/Button";
-import DatePicker from "./DatePicker";
 import TransactionInput from "./TransactionInput";
+import DatePicker from "./DatePicker";
 
 const TransactionForm = ({ defaultValues, onSubmit }) => {
   const [amount, setAmount] = useState(
@@ -101,8 +102,6 @@ const TransactionForm = ({ defaultValues, onSubmit }) => {
   );
 };
 
-export default TransactionForm;
-
 const styles = StyleSheet.create({
   container: {
     marginVertical: 26,
@@ -120,3 +119,5 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 });
+
+export default TransactionForm;

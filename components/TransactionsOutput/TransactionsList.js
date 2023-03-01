@@ -1,4 +1,5 @@
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import { FlatList, Text, View } from "react-native";
+
 import { dateToString } from "../ManageTransaction/DatePicker";
 import TransactionItem from "./TransactionItem";
 
@@ -23,7 +24,5 @@ const TransactionsList = ({ date, items }) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({});
 
 export default TransactionsList;

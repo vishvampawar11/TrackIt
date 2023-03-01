@@ -1,11 +1,11 @@
 import { useContext } from "react";
-import uuid from "react-native-uuid";
-import { Ionicons } from "@expo/vector-icons";
 import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import uuid from "react-native-uuid";
 
+import { TransactionsContext } from "../store/transactions-context";
 import { addTransaction, updateTransaction } from "../store/async-storage";
 import { GlobalStyles } from "../constants/styles";
-import { TransactionsContext } from "../store/transactions-context";
 import TransactionForm from "../components/ManageTransaction/TransactionForm";
 
 const ManageTransaction = ({ transactionId, toggleModal }) => {

@@ -6,10 +6,10 @@ import { TransactionsContext } from "../store/transactions-context";
 import { getTransactions } from "../store/async-storage";
 import { GlobalStyles } from "../constants/styles";
 import ManageTransaction from "./ManageTransaction";
-import TransactionsListContainer from "../components/TransactionsOutput/TransactionsListContainer";
 import TransactionSummary from "../components/TransactionsOutput/TransactionSummary";
-import IconButton from "../components/UI/IconButton";
+import TransactionsListContainer from "../components/TransactionsOutput/TransactionsListContainer";
 import TransactionDetail from "./TransactionDetail";
+import IconButton from "../components/UI/IconButton";
 
 const windowHeight = Dimensions.get("window").height;
 
